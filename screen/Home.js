@@ -1,0 +1,28 @@
+import React from 'react';
+import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
+
+function Home({navigation}) {
+
+
+   
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text >HELLO! I am HOME</Text>
+            
+           
+            <Button title='Login'  
+            onPress={() =>  navigation.navigate('Login')}/>
+        </SafeAreaView>
+    )
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+   
+})
+
+export default Home
