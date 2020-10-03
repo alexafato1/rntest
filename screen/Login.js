@@ -4,7 +4,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import {auth, firebase} from './firebase';
 import * as Google from 'expo-google-app-auth';
 
-function Login() {
+function Login({navigation}) {
     const [User, setUser] = useState(false)
     const [Name, setName] = useState('')
 
@@ -86,7 +86,8 @@ function Login() {
                  
             }
            
-           
+           <Button title='Main'  
+            onPress={() =>  navigation.navigate('Main')}/>
         </View>
         )
 }

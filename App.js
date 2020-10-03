@@ -3,31 +3,21 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './screen/Home';
-import Main from './screen/Main';
-import Message from './screen/Message';
-import Gallery from './screen/Gallery';
-import Login from './screen/Login';
+import MainStackNavigator from './screen/MainStackNavigator'
+import {StateProvider} from './StateProvider';
+import reducer, { initialState} from './screen/reducer';
 
 
 const Stack = createStackNavigator();
 
+
+ 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: 'Welcome' }}
-        />
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Gallery" component={Gallery} />
-        <Stack.Screen name="Message" component={Message} />
-        <Stack.Screen name="Login" component={Login} />
-       
-      </Stack.Navigator>
-  </NavigationContainer>
+    <StateProvider initialState={initialState} reducer={reducer}>
+    <MainStackNavigator />
+    </StateProvider>
+  
   );
 }
 
