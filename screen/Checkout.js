@@ -1,12 +1,12 @@
 import React from 'react'
-import { View } from 'react-native';
+import { View , Button, Text} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import {useStateValue} from './StateProvider';
 import CheckoutProduct from './CheckoutProduct';
-import Subtotal from './Subtotal.js';
+
+import { useStateValue} from '../StateProvider';
 
 function Checkout() {
-    const [{basket}] = useStateValue();
+    const [{basket, calories}] = useStateValue();
 
     return (
        <ScrollView>
@@ -17,6 +17,7 @@ function Checkout() {
                 </View>
          ) : (
             <View>
+             
                 <Text> Shoping Basket</Text>
                 {basket?.map(item =>(
                     
@@ -24,20 +25,15 @@ function Checkout() {
                      id={item.id}
                      title={item.title}
                      image={item.image}
-                     price={item.price}
+                     calories={item.calories}
+                     
                     
                   />
                 ))}
+                 <Text>ALL CALORIES: {calories}</Text>
               </View>
              )}
          
-           {basket.length > 0  && (
-              
-            <View>Subtotal:
-                 <Subtotal/>
-                 </View>
-             
-           )}
 
        </ScrollView>
     )

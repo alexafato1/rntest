@@ -15,6 +15,7 @@ function Product({id, title, image, calories}) {
                 id: id,
                 title: title,
                 image: image,
+                calories: calories
                 
             },
             calories: {

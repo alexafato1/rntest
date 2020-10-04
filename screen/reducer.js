@@ -6,7 +6,7 @@ export const initialState = {
 
 const reducer = (state, action) =>{
     console.log(action)
-    console.log(action.calories.calories)
+   
     switch (action.type) {
         case 'ADD':
             return { 
@@ -16,7 +16,22 @@ const reducer = (state, action) =>{
             }
            
         case 'DELETE':
-            return { state}
+          let newBasket = [...state.basket];
+          console.log(action)
+          const index = state.basket.findIndex((basketItem) => basketItem.id === action.id);
+              if (index>= 0) {
+                  newBasket.splice(index, 1)
+                  
+              } else {
+                  console.warn(
+                      `Cant remove ${action.id}`
+                  );
+              }
+          
+            return { ...state,
+                basket: newBasket,
+                calories: state.calories - action.calories
+            }
            
         default: 
           return state;

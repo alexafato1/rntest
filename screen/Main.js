@@ -2,13 +2,15 @@ import React from 'react'
 import { ScrollView, } from 'react-native-gesture-handler'
 import Product from './Product'
 import { useStateValue} from '../StateProvider';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-function Main() {
+function Main({navigation}) {
     const [{calories}, dispatch] = useStateValue();
     return (
         <View> 
             <Text>YOUR CALORIES: {calories}</Text>
+            <Button title='Checkout'  
+            onPress={() =>  navigation.navigate('Checkout')}/>
         <ScrollView>
          
             <Product
