@@ -2,15 +2,22 @@ import React from 'react'
 import { ScrollView, } from 'react-native-gesture-handler'
 import Product from './Product'
 import { useStateValue} from '../StateProvider';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet} from 'react-native';
+import Login from './Login';
 
 function Main({navigation}) {
     const [{calories}, dispatch] = useStateValue();
+
+
+
     return (
         <View> 
-            <Text>YOUR CALORIES: {calories}</Text>
+         <View style={styles.singUp}>
+             <Login/>
+            
             <Button title='Checkout'  
             onPress={() =>  navigation.navigate('Checkout')}/>
+            </View>
         <ScrollView>
          
             <Product
@@ -34,5 +41,22 @@ function Main({navigation}) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      
+    },
+    singUp: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      color: 'white',
+      alignItems: 'center',
+      backgroundColor: 'lightgreen',
+      paddingTop: 5
+      
+    },
+  })
 
 export default Main

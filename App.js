@@ -4,15 +4,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainStackNavigator from './screen/MainStackNavigator'
-import {StateProvider} from './StateProvider';
+import {StateProvider, useStateValue} from './StateProvider';
 import reducer, { initialState} from './screen/reducer';
+
 
 
 const Stack = createStackNavigator();
 
-
- 
 export default function App() {
+  
+
+
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
     <MainStackNavigator />

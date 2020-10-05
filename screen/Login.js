@@ -2,11 +2,16 @@ import React,{useState} from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {auth, firebase} from './firebase';
+import { useStateValue} from '../StateProvider';
+
+
 import * as Google from 'expo-google-app-auth';
 
+
 function Login({navigation}) {
-    const [User, setUser] = useState(false)
+    
     const [Name, setName] = useState('')
+     const [{basket, calories, user}, dispatch] = useStateValue();
 
       async function signInWithGoogleAsync () {
           try{
@@ -17,12 +22,17 @@ function Login({navigation}) {
                 scopes: ['profile', 'email'],   
               })
               if (result.type === 'success') {
-                  setUser(true)
-                  console.log(result)
-                  console.log(result.user.name)
-                  console.log(User)
+                 
+                  
                   setName(result.user.name)
-                return result.accessToken;
+
+                  dispatch({
+                    type: 'SET_USER',
+                    user: result.accessToken
+                 })
+             
+                  return result.accessToken;
+
               } else {
                 return { cancelled: true };
               }
@@ -49,6 +59,7 @@ function Login({navigation}) {
             setUser(false)
             setName('')
             console.log(User)
+            
             /* `accessToken` is now invalid and cannot be used to get data from the Google API with HTTP requests */
           }
 
@@ -73,31 +84,46 @@ function Login({navigation}) {
       }
 
     return (
-        <View  style={styles.container}>
+        <View  >
             {    
-                 !User ?
-                
+                 !user ?
+                 <View style={styles.container}>
                  <Button onPress={() =>signInWithGoogle() } title="Sign in with Google" /> 
-                 :
-                 <View >
-                   <Text>`Hello, {Name}`</Text>
-                 <Button onPress={() => logOut()} title="Sign OUT" />
                  </View>
-                 
-            }
-           
-           <Button title='Main'  
-            onPress={() =>  navigation.navigate('Main')}/>
-        </View>
+                 :
+                 <View>
+                 <View style={styles.singUp}>
+                   <View>
+                   <Text>`Hello, {Name}`</Text>
+                   <Button onPress={() => logOut()} title="SignOut" />
+                   </View>
+                   <View>
+                   <Text>ALL CALORIES: {calories}</Text>
+                   </View>
+                   
+                   </View>
+                
+                
+                 </View>
+                 }
+           </View>
         )
 }
 
  const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  singUp: {
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    color: 'white',
+    alignItems: 'center',
+    backgroundColor: 'lightgreen',
+    paddingTop: 20
+    
   },
 })
 

@@ -8,21 +8,35 @@ import Message from './Message';
 import Gallery from './Gallery';
 import Login from './Login';
 import Checkout from './Checkout';
+import {StateProvider, useStateValue} from '../StateProvider';
 
 const Stack = createStackNavigator();
 
 function MainStackNavigator() {
+  
+     const [{user}, dispatch] = useStateValue();
     return (
         
         <NavigationContainer>
      
          <Stack.Navigator>
-           <Stack.Screen
-             name="Home"
-             component={Home}
-             options={{ title: 'Welcome' }}
-           />
-           <Stack.Screen name="Main" component={Main} />
+         {user  ? (
+     
+      <Stack.Screen
+        name="Main"
+        component={Main}
+        options={{
+          title: 'Main',
+         
+          
+        }}
+      />
+    ) : (
+   
+      <Stack.Screen name="Home" component={Home}/>
+    )}
+           
+         
            <Stack.Screen name="Gallery" component={Gallery} />
            <Stack.Screen name="Message" component={Message} />
            <Stack.Screen name="Checkout" component={Checkout} />

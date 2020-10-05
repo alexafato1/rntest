@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
-
+import Login from './Login';
 function Home({navigation}) {
 
 
@@ -8,10 +8,7 @@ function Home({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <Text >HELLO! I am HOME</Text>
-            
-           
-            <Button title='Login'  
-            onPress={() =>  navigation.navigate('Login')}/>
+           <Login/>
         </SafeAreaView>
     )
 }
