@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home';
 import Main from './Main';
 import Message from './Message';
-import Gallery from './Gallery';
+import Recipe from './Recipe';
 import Login from './Login';
 import Checkout from './Checkout';
 import {StateProvider, useStateValue} from '../StateProvider';
@@ -37,7 +37,7 @@ function MainStackNavigator() {
     )}
            
          
-           <Stack.Screen name="Gallery" component={Gallery} />
+           <Stack.Screen name="Recipe" component={Recipe} />
            <Stack.Screen name="Message" component={Message} />
            <Stack.Screen name="Checkout" component={Checkout} />
            <Stack.Screen name="Login" component={Login} />

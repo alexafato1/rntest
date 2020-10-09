@@ -1,11 +1,14 @@
 import React,{ useState} from 'react'
 import { Button, Text, View } from 'react-native';
 import { useStateValue} from '../StateProvider';
+import {db} from './Firebase'
 
 function CheckoutProduct({id, title, image,calories }) {
-    const [{basket}, dispatch] = useStateValue();
-
+    const [{user}, dispatch] = useStateValue();
+ 
     const RemoveFromBasket =()=>{
+      db.collection('users').doc(user).collection('message').doc(id).delete()
+               
         dispatch({
             type:'DELETE',
             id: id,

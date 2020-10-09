@@ -6,6 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MainStackNavigator from './screen/MainStackNavigator'
 import {StateProvider, useStateValue} from './StateProvider';
 import reducer, { initialState} from './screen/reducer';
+import firebase from 'firebase';
+
+
 
 
 
